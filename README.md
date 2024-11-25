@@ -54,17 +54,18 @@ Ensure you have the following installed on your machine:
    git clone https://github.com/PetkovSvetoslav/First-Kafka-Try-Order-Task/
    cd First-Kafka-Try-Order-Task
    ```
-
-2. **Build and start the Docker containers**:
+2. **Build the Spring Boot Application**:
+   Maven
+   mvn clean package
+   ```
+3. **Build and start the Docker containers**:
    ```bash
    docker-compose up --build
    ```
+4. **Access the application**:
+   - **Backend API and Frontend:** [http://localhost:8080](http://localhost:8080)
 
-3. **Access the application**:
-   - **Frontend:** [http://localhost:3001](http://localhost:3001)
-   - **Backend API:** [http://localhost:8080](http://localhost:8080)
-
-4. **Kafka UI** (optional for debugging messages):
+5. **Kafka UI** (optional for debugging messages):
    - Access Kafka messages at [http://localhost:8081](http://localhost:8081).
 
 ---
