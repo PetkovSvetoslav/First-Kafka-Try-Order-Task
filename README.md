@@ -64,10 +64,8 @@ Ensure you have the following installed on your machine:
    docker-compose up --build
    ```
 4. **Access the application**:
-5. Frontend: http://localhost:3001
-Backend API: http://localhost:8080
+5. Backend API: http://localhost:8080
    - **Backend API:** [http://localhost:8080](http://localhost:8080)
-   - **Frontend:** [http://localhost:3001](http://localhost:3001)
 
 6. **Kafka UI** (optional for debugging messages):
    - Access Kafka messages at [http://localhost:8081](http://localhost:8081).
