@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Processing</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        input {
+            margin-right: 10px;
+        }
+    </style>
+    <script>
+        async function placeOrder() {
+            const name = document.getElementById('name').value;
+            const product = document.getElementById('product').value;
+            const quantity = document.getElementById('quantity').value;
+
+            const response = await fetch('http://localhost:8080/orders', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, product, quantity })
+            });
+
+            if (response.ok) {
+                alert('Order placed successfully!');
+                document.getElementById('orderForm').reset();
+            } else {
+                alert('Failed to place order. Please try again.');
+            }
+        }
+
+        async function fetchOrders() {
+            const response = await fetch('http://localhost:8080/orders/processed');
+            if (response.ok) {
+                const orders = await response.json();
+                const table = document.getElementById('orderTable');
+                table.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Status</th>
+                            <th>Processed At</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                `;
+                const tbody = table.querySelector('tbody');
+                orders.forEach(order => {
+                    const row = tbody.insertRow();
+                    row.insertCell(0).innerText = order.name;
+                    row.insertCell(1).innerText = order.product;
+                    row.insertCell(2).innerText = order.quantity;
+                    row.insertCell(3).innerText = order.status;
+                    row.insertCell(4).innerText = order.processedAt || '-';
+                });
+            } else {
+                console.error('Failed to fetch orders.');
+            }
+        }
+
+        // Fetch orders every 2 seconds
+        setInterval(fetchOrders, 2000);
+        window.onload = fetchOrders;
+    </script>
+</head>
+<body>
+<h1>Order Processing System</h1>
+<form id="orderForm" onsubmit="event.preventDefault(); placeOrder();">
+    <input id="name" placeholder="Name" required />
+    <input id="product" placeholder="Product" required />
+    <input id="quantity" type="number" placeholder="Quantity" required />
+    <button type="submit">Place Order</button>
+</form>
+
+<h2>Processed Orders</h2>
+<table id="orderTable">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Status</th>
+        <th>Processed At</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+</body>
+</html>
