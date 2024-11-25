@@ -56,6 +56,7 @@ Ensure you have the following installed on your machine:
    ```
 2. **Build the Spring Boot Application**:
    Maven
+   ```bash
    mvn clean package
    ```
 3. **Build and start the Docker containers**:
