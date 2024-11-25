@@ -51,7 +51,7 @@ Ensure you have the following installed on your machine:
 
 1. **Clone the repository**:
    ```bash
-   git clone <[repository_url](https://github.com/PetkovSvetoslav/First-Kafka-Try-Order-Task/)>
+   git clone https://github.com/PetkovSvetoslav/First-Kafka-Try-Order-Task/
    cd First-Kafka-Try-Order-Task
    ```
 
